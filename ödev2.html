@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon-Mazi | Resmi Oyun Sayfası</title>
+    
+    <!-- Google Fonts: Oyun hissi için Orbitron ve Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ödev4.css">
+    <!-- Phosphor Icons (Oyun ve Platform Simgeleri için) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cyber': ['Orbitron', 'sans-serif'],
+                        'body': ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        neon: {
+                            cyan: '#00f3ff',
+                            magenta: '#ff003c',
+                            yellow: '#fcee0a',
+                            dark: '#080808',
+                            panel: '#121212'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+<body class="font-body selection:bg-neon-magenta selection:text-white cyber-grid">
+
+    <!-- Oyun Navigasyon Çubuğu -->
+    <nav class="fixed w-full z-50 top-0 bg-neon-dark/90 backdrop-blur-md border-b-2 border-neon-cyan/30" id="navbar">
+        <div class="container mx-auto px-6 py-3 relative flex justify-between items-center">
+            <a href="#" class="font-cyber text-2xl font-black tracking-widest text-white flex items-center gap-2">
+                <i class="ph-fill ph-game-controller text-neon-cyan"></i>
+                NEON<span class="text-neon-magenta">-</span>MAZİ
+            </a>
+            
+            <div class="hidden md:flex space-x-6 font-cyber text-sm tracking-widest uppercase">
+                <a href="#oyunanis" class="hover:text-neon-cyan transition-colors flex items-center gap-1"><i class="ph ph-crosshair"></i> Oynanış</a>
+                <a href="#siniflar" class="hover:text-neon-cyan transition-colors flex items-center gap-1"><i class="ph ph-users"></i> Sınıflar</a>
+                <a href="#medya" class="hover:text-neon-cyan transition-colors flex items-center gap-1"><i class="ph ph-video-camera"></i> Medya</a>
+                <a href="#sistem" class="hover:text-neon-cyan transition-colors flex items-center gap-1"><i class="ph ph-cpu"></i> Sistem</a>
+            </div>
+
+            <button onclick="showModal('wishlist')" class="hidden md:flex items-center gap-2 font-cyber px-5 py-2 bg-neon-magenta text-white font-bold uppercase text-sm hover:bg-white hover:text-black transition-all shadow-[0_0_15px_rgba(255,0,60,0.5)]">
+                <i class="ph-fill ph-steam-logo text-xl"></i> İstek Listesine Ekle
+            </button>
+        </div>
+    </nav>
+
+    <!-- Oyun Hero (Ana Ekran) -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <!-- Arka Plan Görseli -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop" alt="Cyberpunk Gameplay" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-neon-dark via-transparent to-neon-dark/80"></div>
+            <!-- Vignette (Köşeleri karartma) -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle,transparent_20%,#080808_120%)]"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 flex flex-col items-center text-center mt-10">
+            <div class="bg-black/50 border border-neon-cyan/50 px-4 py-1 mb-6 font-cyber text-neon-cyan text-sm tracking-widest inline-flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span> ERKEN ERİŞİM: 2026
+            </div>
+            
+            <h1 class="font-cyber text-6xl md:text-8xl font-black text-white mb-2 glitch uppercase" data-text="NEON-MAZİ">
+                NEON-MAZİ
+            </h1>
+            <h2 class="font-cyber text-2xl md:text-3xl text-neon-yellow tracking-[0.3em] mb-8 uppercase text-center w-full">Anadolu Siberpunk RYO</h2>
+            
+            <p class="font-body text-xl text-gray-300 max-w-3xl mx-auto mb-10 font-medium text-center">
+                İzometrik taktiksel savaşlar, derin RPG mekanikleri ve kararlarının şekillendirdiği acımasız bir siberpunk evreni. Geçmişin mirasını, geleceğin teknolojisiyle savun.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 w-full justify-center max-w-lg">
+                <button onclick="showModal('preorder')" class="font-cyber flex-1 py-4 bg-neon-cyan text-black font-black uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 flex justify-center items-center gap-2 clip-path-slant">
+                    <i class="ph-fill ph-shopping-cart-simple text-xl"></i> Ön Sipariş Ver
+                </button>
+                <a href="#medya" class="font-cyber flex-1 py-4 bg-transparent text-white border-2 border-gray-500 hover:border-neon-magenta hover:text-neon-magenta transition-all uppercase tracking-widest font-bold flex justify-center items-center gap-2">
+                    <i class="ph-fill ph-play text-xl"></i> Oynanış İzle
+                </a>
+            </div>
+
+            <!-- Desteklenen Platformlar -->
+            <div class="mt-16 flex flex-col items-center">
+                <span class="font-cyber text-xs text-gray-500 mb-3 tracking-widest uppercase">Mevcut Platformlar</span>
+                <div class="flex gap-6 text-3xl text-gray-400">
+                    <i class="ph-fill ph-windows-logo hover:text-white transition-colors cursor-help" title="PC (Windows)"></i>
+                    <i class="ph-fill ph-steam-logo hover:text-white transition-colors cursor-help" title="Steam"></i>
+                    <i class="ph-fill ph-playstation-logo hover:text-white transition-colors cursor-help" title="PlayStation 5"></i>
+                    <i class="ph-fill ph-xbox-logo hover:text-white transition-colors cursor-help" title="Xbox Series X|S"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Oynanış Mekanikleri (Oyun Özellikleri) -->
+    <section id="oyunanis" class="py-20 bg-neon-panel border-t-4 border-neon-cyan">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center gap-4 mb-12">
+                <h2 class="font-cyber text-4xl text-white uppercase tracking-widest">Temel Dinamikler</h2>
+                <div class="h-1 bg-neon-cyan flex-grow opacity-20"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Mekanik 1 -->
+                <div class="bg-neon-dark p-8 border border-gray-800 hover:border-neon-cyan transition-colors relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-neon-cyan/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                    <i class="ph-duotone ph-crosshair text-5xl text-neon-cyan mb-6"></i>
+                    <h3 class="font-cyber text-xl text-white mb-3 uppercase">İzometrik Taktiksel Savaş</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed">Gerçek zamanlı durdurulabilir savaş sistemi. Çevreyi kendi avantajına kullan, siper al ve düşman sibernetiklerini hackleyerek avantaj sağla.</p>
+                </div>
+
+                <!-- Mekanik 2 -->
+                <div class="bg-neon-dark p-8 border border-gray-800 hover:border-neon-magenta transition-colors relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-neon-magenta/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                    <i class="ph-duotone ph-cpu text-5xl text-neon-magenta mb-6"></i>
+                    <h3 class="font-cyber text-xl text-white mb-3 uppercase">Derin Loot ve Crafting</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed">Öldürdüğün şirket ajanlarından düşen parçaları topla. Kendi silahlarını modifiye et ve vücuduna yasa dışı çip implantları tak.</p>
+                </div>
+
+                <!-- Mekanik 3 -->
+                <div class="bg-neon-dark p-8 border border-gray-800 hover:border-neon-yellow transition-colors relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-neon-yellow/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                    <i class="ph-duotone ph-git-branch text-5xl text-neon-yellow mb-6"></i>
+                    <h3 class="font-cyber text-xl text-white mb-3 uppercase">Dallanan Hikaye</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed">Sokak çeteleri mi yoksa mega şirketler mi? Yaptığın her seçim Neon-İstanbul'un kaderini ve oyunun sonunu doğrudan değiştirecek.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RPG Sınıf Seçimi (Karakterler) -->
+    <section id="siniflar" class="py-20 bg-neon-dark relative overflow-hidden">
+        <!-- Arkaplan Dekoru -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 text-[10rem] md:text-[20rem] font-cyber text-white opacity-[0.02] select-none pointer-events-none">CLASSES</div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-neon-yellow font-cyber text-sm tracking-widest uppercase">Karakter Yaratma Ekranı</span>
+                <h2 class="font-cyber text-4xl text-white mt-2 uppercase tracking-widest">Siber-Genetiğini Seç</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Sınıf 1: Akıncı -->
+                <div class="char-card bg-black border-2 border-gray-800 p-6 transition-all duration-300 hover:border-neon-cyan">
+                    <div class="h-48 bg-gray-900 mb-6 flex items-center justify-center relative overflow-hidden border border-gray-700">
+                        <img src="https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=2000&auto=format&fit=crop" alt="Akıncı" class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-luminosity">
+                        <span class="relative font-cyber text-2xl text-white font-bold tracking-widest z-10">AKINCI</span>
+                        <div class="absolute bottom-2 left-2 bg-neon-cyan text-black text-xs font-bold px-2 py-1 uppercase">Yakın Dövüş</div>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mb-6 h-16">Geliştirilmiş nano-kaslar ve plazma kılıçlarıyla gölgelerde hareket eden, hızlı ve ölümcül suikastçılar.</p>
+                    
+                    <!-- İstatistikler -->
+                    <div class="space-y-4 font-cyber text-sm">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Güç / Hasar</span> <span class="text-neon-cyan">85%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-neon-cyan w-[85%] shadow-[0_0_10px_#00f3ff]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Çeviklik / Hız</span> <span class="text-neon-cyan">90%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-neon-cyan w-[90%] shadow-[0_0_10px_#00f3ff]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Ağ Hackleme</span> <span class="text-gray-500">30%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-gray-500 w-[30%]"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sınıf 2: Tekno-Derviş -->
+                <div class="char-card bg-black border-2 border-gray-800 p-6 transition-all duration-300 hover:border-neon-magenta">
+                    <div class="h-48 bg-gray-900 mb-6 flex items-center justify-center relative overflow-hidden border border-gray-700">
+                        <div class="absolute inset-0 cyber-grid opacity-50"></div>
+                        <span class="relative font-cyber text-2xl text-white font-bold tracking-widest z-10">TEKNO-DERVİŞ</span>
+                        <div class="absolute bottom-2 left-2 bg-neon-magenta text-white text-xs font-bold px-2 py-1 uppercase">Destek & Hack</div>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mb-6 h-16">Zihinlerini 'Büyük Ağ'a doğrudan bağlayabilen, düşman sibernetiklerini ve güvenlik sistemlerini uzaktan manipüle eden siber-büyücüler.</p>
+                    
+                    <!-- İstatistikler -->
+                    <div class="space-y-4 font-cyber text-sm">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Güç / Hasar</span> <span class="text-gray-500">40%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-gray-500 w-[40%]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Çeviklik / Hız</span> <span class="text-neon-magenta">65%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-neon-magenta w-[65%] shadow-[0_0_10px_#ff003c]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Ağ Hackleme</span> <span class="text-neon-magenta">95%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-neon-magenta w-[95%] shadow-[0_0_10px_#ff003c]"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sınıf 3: Yeniçeri -->
+                <div class="char-card bg-black border-2 border-gray-800 p-6 transition-all duration-300 hover:border-neon-yellow">
+                    <div class="h-48 bg-gray-900 mb-6 flex items-center justify-center relative overflow-hidden border border-gray-700">
+                        <img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=2000&auto=format&fit=crop" alt="Meka-Yeniçeri" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen">
+                        <span class="relative font-cyber text-2xl text-white font-bold tracking-widest z-10">MEKA-YENİÇERİ</span>
+                        <div class="absolute bottom-2 left-2 bg-neon-yellow text-black text-xs font-bold px-2 py-1 uppercase">Ağır Zırh & Tank</div>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mb-6 h-16">Ağır silah ve patlayıcı uzmanları. Devasa gövde modifikasyonları ve titanyum zırhları onları yürüyen birer tanka dönüştürür.</p>
+                    
+                    <!-- İstatistikler -->
+                    <div class="space-y-4 font-cyber text-sm">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Hayatta Kalma (HP)</span> <span class="text-neon-yellow">100%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-neon-yellow w-[100%] shadow-[0_0_10px_#fcee0a]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Ağır Silahlar</span> <span class="text-neon-yellow">85%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-neon-yellow w-[85%] shadow-[0_0_10px_#fcee0a]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-white">Çeviklik / Hız</span> <span class="text-gray-500">20%</span></div>
+                            <div class="h-1.5 w-full bg-gray-800"><div class="h-full bg-gray-500 w-[20%]"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oyun Fragmanı (Medya - Bölüm 3) -->
+    <section id="medya" class="py-24 bg-black border-y border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-cyber text-4xl text-white mb-2 uppercase tracking-widest">Resmi Oynanış Fragmanı</h2>
+            <p class="text-gray-500 mb-10 font-body text-lg uppercase tracking-wider">Ön-Alfa Görüntüleri (Oyun motoru içinden kaydedilmiştir)</p>
+
+            <div class="max-w-5xl mx-auto relative group">
+                <!-- Video Container -->
+                <div class="aspect-video bg-neon-panel border border-gray-700 relative shadow-2xl overflow-hidden rounded-sm">
+                    
+                    <!-- YÜKLEDİĞİN VİDEO BURADA -->
+                    <video id="oyun-videosu" src="ödev3.mp4" class="w-full h-full object-cover z-0" poster="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop"></video>
+                    
+                    <!-- Oynat Butonu Katmanı -->
+                    <div id="oynat-katmani" onclick="videoyuOynat()" class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center group-hover:bg-black/30 transition-all cursor-pointer z-10 border-2 border-transparent hover:border-neon-cyan">
+                        <div class="w-24 h-24 bg-neon-magenta/20 backdrop-blur-sm flex items-center justify-center border-2 border-neon-magenta rounded-full group-hover:scale-110 group-hover:bg-neon-magenta transition-all duration-300 shadow-[0_0_30px_rgba(255,0,60,0.4)] mb-4">
+                            <i class="ph-fill ph-play text-5xl text-white ml-2"></i>
+                        </div>
+                        <p class="font-cyber text-neon-cyan tracking-widest text-sm uppercase group-hover:text-white transition-colors">Yapay Zeka Fragmanını İzle</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sistem Gereksinimleri (PC Oyuncuları İçin) -->
+    <section id="sistem" class="py-20 bg-neon-panel cyber-grid">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="font-cyber text-3xl text-white mb-10 uppercase tracking-widest text-center border-b border-gray-800 pb-4">
+                PC Sistem Gereksinimleri
+            </h2>
+
+            <div class="flex flex-col md:flex-row gap-8 font-body">
+                <!-- Minimum -->
+                <div class="flex-1 bg-black/80 border border-gray-800 p-6">
+                    <h3 class="font-cyber text-neon-cyan text-xl mb-4 uppercase border-b border-gray-800 pb-2">Minimum</h3>
+                    <ul class="space-y-4 text-gray-400 text-lg">
+                        <li><strong class="text-white">İşletim Sistemi:</strong> Windows 10 (64-bit)</li>
+                        <li><strong class="text-white">İşlemci:</strong> Intel Core i5-8400 / AMD Ryzen 5 1600</li>
+                        <li><strong class="text-white">Bellek:</strong> 8 GB RAM</li>
+                        <li><strong class="text-white">Ekran Kartı:</strong> NVIDIA GTX 1060 (6GB) / AMD Radeon RX 580</li>
+                        <li><strong class="text-white">DirectX:</strong> Sürüm 12</li>
+                        <li><strong class="text-white">Depolama:</strong> 45 GB kullanılabilir alan (SSD Önerilir)</li>
+                    </ul>
+                </div>
+
+                <!-- Önerilen -->
+                <div class="flex-1 bg-black/80 border border-neon-cyan/50 p-6 shadow-[0_0_20px_rgba(0,243,255,0.05)] relative">
+                    <div class="absolute top-0 right-0 bg-neon-cyan text-black font-cyber text-xs px-2 py-1 font-bold">TAVSİYE EDİLEN</div>
+                    <h3 class="font-cyber text-neon-cyan text-xl mb-4 uppercase border-b border-neon-cyan/20 pb-2">Önerilen</h3>
+                    <ul class="space-y-4 text-gray-300 text-lg">
+                        <li><strong class="text-white">İşletim Sistemi:</strong> Windows 11 (64-bit)</li>
+                        <li><strong class="text-white">İşlemci:</strong> Intel Core i7-12700K / AMD Ryzen 7 5800X3D</li>
+                        <li><strong class="text-white">Bellek:</strong> 16 GB RAM</li>
+                        <li><strong class="text-white">Ekran Kartı:</strong> NVIDIA RTX 3070 / AMD Radeon RX 6800</li>
+                        <li><strong class="text-white">DirectX:</strong> Sürüm 12</li>
+                        <li><strong class="text-white">Depolama:</strong> 45 GB NVMe SSD</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oyun Footer -->
+    <footer class="bg-[#050505] pt-16 pb-8 border-t-2 border-neon-magenta relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-10 border-b border-gray-800 pb-12 mb-8">
+                
+                <!-- Logo & Derecelendirme -->
+                <div class="flex flex-col items-center md:items-start max-w-sm">
+                    <a href="#" class="font-cyber text-3xl font-black tracking-widest text-white mb-4">
+                        NEON<span class="text-neon-magenta">-</span>MAZİ
+                    </a>
+                    <p class="text-gray-500 text-sm mb-6 text-center md:text-left">Bu web sitesi, hayali bir oyun projesi için akademik ödev kapsamında tasarlanmıştır. Ticari bir amacı yoktur.</p>
+                    
+                    <!-- Oyun Yaş Derecelendirmesi (Görsel Amacıyla) -->
+                    <div class="flex items-center gap-3 border border-gray-700 p-2 bg-black">
+                        <div class="font-cyber text-2xl font-bold bg-white text-black px-2 py-1">18+</div>
+                        <div class="text-xs text-gray-400 font-bold leading-tight">
+                            ŞİDDET<br>
+                            KÜFÜR / ARGO<br>
+                            OYUN İÇİ SATIN ALMA
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hızlı Linkler -->
+                <div class="flex gap-16 text-center md:text-left">
+                    <div>
+                        <h4 class="font-cyber text-white mb-4 uppercase tracking-widest text-sm">Oyun</h4>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><a href="#" class="hover:text-neon-cyan">Hakkında</a></li>
+                            <li><a href="#" class="hover:text-neon-cyan">Sıkça Sorulan Sorular</a></li>
+                            <li><a href="#" class="hover:text-neon-cyan">Yama Notları</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-cyber text-white mb-4 uppercase tracking-widest text-sm">Topluluk</h4>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li><a href="#" class="hover:text-neon-magenta flex items-center gap-2 justify-center md:justify-start"><i class="ph-fill ph-discord-logo"></i> Discord</a></li>
+                            <li><a href="#" class="hover:text-neon-magenta flex items-center gap-2 justify-center md:justify-start"><i class="ph-fill ph-twitter-logo"></i> Twitter</a></li>
+                            <li><a href="#" class="hover:text-neon-magenta flex items-center gap-2 justify-center md:justify-start"><i class="ph-fill ph-youtube-logo"></i> YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alt Bilgi / Copyright -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-cyber tracking-widest">
+                <p>© 2026 NEON-MAZİ STUDIOS. TÜM HAKLARI SAKLIDIR.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">GİZLİLİK POLİTİKASI</a>
+                    <a href="#" class="hover:text-white">KULLANIM ŞARTLARI</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Oyun İçi Mağaza Modalı (Pop-up) -->
+    <div id="action-modal" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="bg-black border-2 border-neon-cyan p-10 max-w-lg w-full relative shadow-[0_0_50px_rgba(0,243,255,0.15)] mx-4">
+            
+            <button onclick="hideModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                <i class="ph ph-x text-3xl"></i>
+            </button>
+            
+            <div class="text-center mb-8">
+                <i class="ph-duotone ph-warning-circle text-5xl text-neon-yellow mb-4" id="modal-icon"></i>
+                <h3 id="modal-title" class="font-cyber text-3xl text-white uppercase tracking-widest mb-2">Sisteme Bağlanılıyor...</h3>
+                <p id="modal-desc" class="text-gray-400 font-body text-lg">Bu işlem için güvenli bir ağ bağlantısı gerekiyor.</p>
+            </div>
+
+            <div class="h-1 bg-gray-800 w-full mb-8 relative overflow-hidden" id="modal-loader">
+                <div class="absolute top-0 left-0 h-full bg-neon-cyan w-1/2 animate-[pulse_1s_ease-in-out_infinite]"></div>
+            </div>
+
+            <div class="flex justify-center">
+                <button id="modal-btn" onclick="processAction()" class="font-cyber px-8 py-4 bg-neon-cyan text-black font-black uppercase tracking-widest hover:bg-white transition-colors flex items-center gap-2">
+                    <i class="ph-bold ph-fingerprint text-xl"></i> Kimliği Doğrula (Ödev Modu)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tüm İşlevsellik İçin JavaScript -->
+  <script src="ödev1.js"></script>
+</body>
+</html>
